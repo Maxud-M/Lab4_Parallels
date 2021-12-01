@@ -5,7 +5,9 @@ import java.util.ArrayList;
 public class TestExecutor extends AbstractActor {
     @Override
     public Receive createReceive() {
-        return ReceiveBuilder.create().
+        return ReceiveBuilder.create().match(Message.class, m -> {
+            
+        }).build();
     }
 
     public class Message{
