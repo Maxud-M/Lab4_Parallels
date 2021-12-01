@@ -1,4 +1,5 @@
 import akka.actor.AbstractActor;
+import akka.actor.dsl.Inbox;
 import akka.japi.pf.ReceiveBuilder;
 
 import java.util.ArrayList;
@@ -8,9 +9,14 @@ import java.util.Map;
 public class StoreActor extends AbstractActor {
     private Map<Integer, ArrayList<Integer>> store = new HashMap<>();
 
-    public static class StoreTestResult{
+    public static class StoreMessage{
         private int packageId;
         private int result;
+
+        StoreMessage(int packageId, int result) {
+            this.packageId = packageId;
+            this.result = result;
+        }
 
         public int getResult() {
             return result;
@@ -22,13 +28,21 @@ public class StoreActor extends AbstractActor {
     }
 
     public static class GetMessage{
-        int packageId;
+        private int packageId;
+
+        GetMessage(int packageId) {
+            this.packageId = packageId;
+        }
+
+        public int getPackageId() {
+            return packageId;
+        }
     }
 
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(StoreTestResult.class, m -> {
+                .match(StoreMessage.class, m -> {
                     ArrayList<Integer> results = store.get(m.getPackageId());
                     if(results == null) {
                         results = new ArrayList<>(0);
@@ -37,6 +51,6 @@ public class StoreActor extends AbstractActor {
                     store.put(m.getPackageId(), results);
                     System.out.println("recieve test");
         })
-                .match(GetMessage.class, req -> sender().tell(, store.get(req.getKey())), self())).build();
+                .match(GetMessage.class, req -> sender().tell(store.get(req.getPackageId()), self())).build();
     }
 }
