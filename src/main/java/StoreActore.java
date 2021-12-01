@@ -12,7 +12,8 @@ public class StoreActore extends AbstractActor {
                 .match(StoreMessage.class, m -> {
             store.put(m.getKey(), m.getValue());
             System.out.println("recieve message " + m.toString());
-        });
+        })
+                .match;
         return null;
     }
 }
