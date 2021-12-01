@@ -1,14 +1,16 @@
 import akka.actor.AbstractActor;
 import akka.japi.pf.ReceiveBuilder;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StoreActor extends AbstractActor {
-    private Map<String, String> store = new HashMap<>();
+    private Map<Integer, ArrayList<Integer>> store = new HashMap<>();
 
     public static class StoreTestResult{
         int packageId;
-
+        int result;
     }
 
     @Override
