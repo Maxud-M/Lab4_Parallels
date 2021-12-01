@@ -14,7 +14,6 @@ public class TestExecutor extends AbstractActor {
             engine.eval(m.getJsScript());
             Invocable invocable = (Invocable) engine;
             String result = invocable.invokeFunction(m.getFunctionName(), m.getParams()).toString();
-            ActorSelection actorSelection = new 
             sender().tell(new StoreActor.StoreMessage(m.getPackageId(), result), self());
         }).build();
     }
