@@ -8,7 +8,7 @@ public class StoreActore extends AbstractActor {
 
     @Override
     public Receive createReceive() {
-        return ReceiveBuilder.create()
+        return ReceiveBuilder.create().match()
         return null;
     }
 }
