@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("test");
-        ActorRef router = system.actorOf(new RoundRobinPool(5)
-                .props(Props.create(StoreActor.class, TestExecutor.class)), "router for tests");
-
+        RoundRobinPool router = new RoundRobinPool(5);
+        Router router1 = router.createRouter(system);
+        router1.addRoutee(Props.create())
 
     }
 }
