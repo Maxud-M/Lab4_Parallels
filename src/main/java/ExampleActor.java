@@ -2,7 +2,7 @@ import akka.actor.AbstractActor;
 
 public class ExampleActor extends AbstractActor {
     public static enum Msg {
-        GREET, DONE, ERROR;
+        GREET, DONE;
     }
     @Override
     public Receive createReceive() {
