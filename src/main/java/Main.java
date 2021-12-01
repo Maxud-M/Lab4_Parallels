@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("test");
         Router router = system.actorOf(Props.create(StoreActor));
-        router.addRoutee();
+        router.addRoutee(Props.empty().withRouter(R));
 
     }
 }
