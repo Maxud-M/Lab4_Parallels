@@ -9,16 +9,29 @@ public class StoreActor extends AbstractActor {
     private Map<Integer, ArrayList<Integer>> store = new HashMap<>();
 
     public static class StoreTestResult{
-        int packageId;
-        int result;
+        private int packageId;
+        private int result;
+
+        public int getResult() {
+            return result;
+        }
+
+        public int getPackageId() {
+            return packageId;
+        }
     }
 
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(StoreTestResult.class, m -> {
-            store.put(m.getKey(), m.getValue());
-            System.out.println("recieve message " + m.toString());
+                    ArrayList<Integer> results = store.get(m.getPackageId());
+                    if(results == null) {
+                        results = new ArrayList<>(0);
+                    }
+                    results.add(m.getResult());
+                    store.put(m.getPackageId(), results);
+                    sender().tell("all ok", self());
         })
                 .match(GetMessage.class, req -> sender.tell(new StoreMessage(req.getKey(), store.get(req.getKey())), self())).build();
     }
