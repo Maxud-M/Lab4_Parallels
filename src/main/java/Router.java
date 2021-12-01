@@ -1,2 +1,2 @@
-public class Router {
+public class Router extends {
 }
