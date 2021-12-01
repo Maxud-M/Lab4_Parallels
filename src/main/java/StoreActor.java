@@ -37,6 +37,6 @@ public class StoreActor extends AbstractActor {
                     store.put(m.getPackageId(), results);
                     System.out.println("recieve test");
         })
-                .match(GetMessage.class, req -> sender().tell(new StoreTestResult(req.getKey(), store.get(req.getKey())), self())).build();
+                .match(GetMessage.class, req -> sender().tell(, store.get(req.getKey())), self())).build();
     }
 }
