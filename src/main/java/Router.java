@@ -1,2 +1,2 @@
-public class Router extends {
+public class Router extends RoundRobinPool{
 }
