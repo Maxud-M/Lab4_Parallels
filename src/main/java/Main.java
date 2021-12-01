@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("test");
-        ActorRef router = system.actorOf()
+        ActorRef router = system.actorOf(new RoundRobinPool(5))
 
 
     }
