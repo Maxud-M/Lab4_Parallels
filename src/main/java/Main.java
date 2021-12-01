@@ -6,8 +6,8 @@ import akka.routing.RouterActor;
 public class Main {
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("test");
-        Router router;
-        Routee
+        Router router;  
+        router.route();
 
     }
 }
