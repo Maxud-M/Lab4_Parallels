@@ -14,15 +14,20 @@ public class TestExecutor extends AbstractActor {
             engine.eval(m.getJsScript());
             Invocable invocable = (Invocable) engine;
             String result = invocable.invokeFunction(m.getFunctionName(), m.getParams()).toString();
+            sender().tell(new StoreActor.StoreMessage(m.getPackageId(), result), self());
         }).build();
     }
 
     public class Message{
+        private int packageId;
         private String functionName;
         private String jsScript;
         private ArrayList<String> params;
         private String expectedResult;
 
+        public int getPackageId() {
+            return packageId;
+        }
         public String getFunctionName() {
             return functionName;
         }

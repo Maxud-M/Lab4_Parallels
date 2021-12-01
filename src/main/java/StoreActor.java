@@ -7,18 +7,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StoreActor extends AbstractActor {
-    private Map<Integer, ArrayList<Integer>> store = new HashMap<>();
+    private Map<Integer, ArrayList<String>> store = new HashMap<>();
 
     public static class StoreMessage{
         private int packageId;
-        private int result;
+        private String result;
 
-        StoreMessage(int packageId, int result) {
+        StoreMessage(int packageId, String result) {
             this.packageId = packageId;
             this.result = result;
         }
 
-        public int getResult() {
+        public String getResult() {
             return result;
         }
 
@@ -43,7 +43,7 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(StoreMessage.class, m -> {
-                    ArrayList<Integer> results = store.get(m.getPackageId());
+                    ArrayList<String> results = store.get(m.getPackageId());
                     if(results == null) {
                         results = new ArrayList<>(0);
                     }
