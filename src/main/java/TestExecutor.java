@@ -1,12 +1,21 @@
+import akka.actor.AbstractActor;
+import akka.japi.pf.ReceiveBuilder;
 import java.util.ArrayList;
 
-public class TestExecutor {
-    public class StoreMessage{
-        String functionName;
-        String jsScript;
-        ArrayList<String> params;
-        String expectedResult;
+public class TestExecutor extends AbstractActor {
+    @Override
+    public Receive createReceive() {
+        return RecieveBuilder.create();
     }
 
-    public class Get
+    public class Message{
+        private String functionName;
+        private String jsScript;
+        private ArrayList<String> params;
+        private String expectedResult;
+    }
+
+
+
+    public class
 }
