@@ -8,6 +8,7 @@ public class StoreActore extends AbstractActor {
 
     @Override
     public Receive createReceive() {
+        receiveBuilder()
         return null;
     }
 }
