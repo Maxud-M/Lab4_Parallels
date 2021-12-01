@@ -13,7 +13,7 @@ public class StoreActore extends AbstractActor {
             store.put(m.getKey(), m.getValue());
             System.out.println("recieve message " + m.toString());
         })
-                .match(GetMessage.class, req -> sender.tell(new StoreMessage));
+                .match(GetMessage.class, req -> sender.tell(new StoreMessage(req.getKey())));
         return null;
     }
 }
