@@ -13,7 +13,7 @@ public class TestExecutor extends AbstractActor {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
             engine.eval(m.getJsScript());
             Invocable invocable = (Invocable) engine;
-            invocable.invokeFunction(m.getFunctionName(), m.getParams()).toString();
+            Object result = invocable.invokeFunction(m.getFunctionName(), m.getParams()).toString();
         }).build();
     }
 
