@@ -7,7 +7,8 @@ public class StoreActor extends AbstractActor {
     private Map<String, String> store = new HashMap<>();
 
     public static class StoreTestResult{
-        int packageID
+        int packageId;
+
     }
 
     @Override
