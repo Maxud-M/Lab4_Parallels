@@ -32,8 +32,7 @@ public class TestExecutor extends AbstractActor {
 
         @JsonProperty("jsScript")
         private String jsScript;
-
-        @JsonProperty("params")
+        
         private ArrayList<Object> params;
         private String expectedResult;
 
