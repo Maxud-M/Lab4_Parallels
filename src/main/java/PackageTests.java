@@ -23,6 +23,7 @@ public class PackageTests {
 
     @JsonProperty(TESTS)
     ArrayList<Test> tests;
+
     @JsonCreator
     PackageTests(@JsonProperty(Constants.PACKAGE_ID) int packageId, @JsonProperty(JS_SCRIPT) String jsScript,
                  @JsonProperty(FUNCTION_NAME) String functionName, @JsonProperty(TESTS) ArrayList<Test> tests) {
