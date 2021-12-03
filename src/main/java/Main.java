@@ -15,13 +15,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.CompletionStage;
 
+import static akka.http.javadsl.server.Directives.get;
 import static akka.http.javadsl.server.Directives.route;
 
 public class Main {
 
     public class MainHttp {
         public Route createRoute(ActorSystem system) {
-            return route()
+            return route(get())
         }
     }
 
