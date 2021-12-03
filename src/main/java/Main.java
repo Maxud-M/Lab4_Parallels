@@ -16,6 +16,13 @@ import java.util.Collections;
 import java.util.concurrent.CompletionStage;
 
 public class Main {
+
+    public class MainHttp {
+        public Route createRoute(ActorSystem system) {
+            return new route()
+        }
+    }
+
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("routes");
         ActorRef storeActor = system.actorOf(Props.create(StoreActor.class), "storeActor");
@@ -28,8 +35,9 @@ public class Main {
         Route route;
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
+        MainHttp instance = new MainHttp(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                http.createRoute(system).flow(system, materializer);
+                instance.createRoute(system).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),
