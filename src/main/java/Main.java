@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.CompletionStage;
 
-import static akka.http.javadsl.server.Directives.get;
-import static akka.http.javadsl.server.Directives.route;
+import static akka.http.javadsl.server.Directives.*;
 
 public class Main {
 
@@ -24,7 +23,7 @@ public class Main {
         public Route createRoute(ActorSystem system) {
             return route(
                     get(
-                            () -> 
+                            () -> parameter("packageID")
                     )
             )
             }))
