@@ -9,33 +9,34 @@ public class PackageTests {
     public static final String JS_SCRIPT = "jsScript";
     public static final String TESTS = "tests";
     public static final String EXPECTED_RESULT = "expectedResult";
-    public static final String
+    public static final String PARAMS = "params";
+    public static final String TEST_NAME = "testName"
 
-    @JsonProperty("packageId")
+    @JsonProperty(Constants.PACKAGE_ID)
     int packageId;
 
-    @JsonProperty("jsScript")
+    @JsonProperty(JS_SCRIPT)
     String jsScript;
 
-    @JsonProperty("functionName")
+    @JsonProperty(FUNCTION_NAME)
     String functionName;
 
-    @JsonProperty("tests")
+    @JsonProperty(TESTS)
     ArrayList<Test> tests;
 
 
 
     public class Test{
-        @JsonProperty("testName")
+        @JsonProperty(TEST_NAME)
         String testName;
 
-        @JsonProperty("expectedResult")
+        @JsonProperty(EXPECTED_RESULT)
         String expectedResult;
 
-        @JsonProperty("params")
+        @JsonProperty(PARAMS)
         ArrayList<Object> params;
 
         @JsonCreator
-        Test(@JsonProperty)
+        Test(@JsonProperty(Constants.PACKAGE_ID)packageId, )
     }
 }
