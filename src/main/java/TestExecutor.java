@@ -24,9 +24,10 @@ public class TestExecutor extends AbstractActor {
     }
 
     public class Message{
-        @JsonProperty(packageId)
+        @JsonProperty("packageId")
         private int packageId;
 
+        @JsonProperty()
         private String functionName;
         private String jsScript;
         private ArrayList<Object> params;
