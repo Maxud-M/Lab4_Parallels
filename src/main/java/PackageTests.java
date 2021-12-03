@@ -18,6 +18,6 @@ public class PackageTests {
 
 
     public class Test{
-        
+        @JsonProperty("testName")
     }
 }
