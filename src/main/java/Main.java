@@ -3,6 +3,7 @@ import akka.actor.*;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
+import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
@@ -33,10 +34,10 @@ public class Main {
                                 CompletionStage<Object> result = PatternsCS.ask(storeActor, new StoreActor.GetMessage(packageId), TIMEOUT);
                                 return completeOKWithFuture(
                                         result,
-                                        JSON.marshaller()
-                                )
+                                        Jackson.marshaller()
+                                );
                             })
-                    )
+                    ),
             )
             }))
         }
