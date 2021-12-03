@@ -11,6 +11,7 @@ import akka.routing.*;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import akka.util.Timeout;
+import scala.util.parsing.json.JSON;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -30,7 +31,10 @@ public class Main {
                                 int packageId = Integer.parseInt(parameter);
                                 ActorSelection storeActor = system.actorSelection("/user/storeActor");
                                 CompletionStage<Object> result = PatternsCS.ask(storeActor, new StoreActor.GetMessage(packageId), TIMEOUT);
-                                return CompleteOkWithFuture
+                                return completeOKWithFuture(
+                                        result,
+                                        JSON.marshaller()
+                                )
                             })
                     )
             )
