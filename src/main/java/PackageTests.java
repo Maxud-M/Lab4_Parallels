@@ -37,6 +37,8 @@ public class PackageTests {
         ArrayList<Object> params;
 
         @JsonCreator
-        Test(@JsonProperty(Constants.PACKAGE_ID)packageId, )
+        Test(@JsonProperty(Constants.PACKAGE_ID) int packageId, JsonProperty()) {
+
+        }
     }
 }
