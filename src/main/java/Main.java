@@ -6,6 +6,7 @@ import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
+import akka.pattern.PatternsCS;
 import akka.routing.*;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
@@ -23,7 +24,11 @@ public class Main {
         public Route createRoute(ActorSystem system) {
             return route(
                     get(
-                            () -> parameter("packageID")
+                            () -> parameter("packageId", (parameter) -> {
+                                int packageId = Integer.valueOf(parameter);
+                                ActorSelection storeActor = system.actorSelection("/user/storeActor");
+                                CompletionStage<Object> result = PatternsCS.ask(storeActor, new StoreActor.GetMessage(packageId));
+                            })
                     )
             )
             }))
