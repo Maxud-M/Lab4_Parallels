@@ -23,6 +23,14 @@ public class PackageTests {
 
     @JsonProperty(TESTS)
     ArrayList<Test> tests;
+    @JsonCreator
+    PackageTests(@JsonProperty(Constants.PACKAGE_ID) int packageId, @JsonProperty(JS_SCRIPT) String jsScript,
+                 @JsonProperty(FUNCTION_NAME) String functionName, @JsonProperty(TESTS) ArrayList<Test> tests) {
+        this.packageId = packageId;
+        this.tests = tests;
+        this.functionName = functionName;
+        this.jsScript = jsScript;
+    }
 
 
 
@@ -37,9 +45,11 @@ public class PackageTests {
         ArrayList<Object> params;
 
         @JsonCreator
-        Test(@JsonProperty(Constants.PACKAGE_ID) int packageId, @JsonProperty(JS_SCRIPT) String jsScript,
-             @JsonProperty(FUNCTION_NAME) String functionName, @JsonProperty()) {
-
+        Test(@JsonProperty(TEST_NAME) String testName, @JsonProperty(EXPECTED_RESULT) String expectedResult,
+             @JsonProperty(PARAMS) ArrayList<Object> params) {
+            this.testName = testName;
+            this.expectedResult = expectedResult;
+            this.params = params;
         }
     }
 }
