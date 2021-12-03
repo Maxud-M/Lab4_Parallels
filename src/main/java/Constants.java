@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class Constants {
+public class Constants {
+    public static final String PACKAGE_ID = "packageId";
+
 }

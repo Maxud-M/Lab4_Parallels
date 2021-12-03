@@ -5,7 +5,11 @@ import java.util.ArrayList;
 
 public class PackageTests {
 
-    const static final Srting
+    public static final String FUNCTION_NAME = "functionName";
+    public static final String JS_SCRIPT = "jsScript";
+    public static final String TESTS = "tests";
+    public static final String EXPECTED_RESULT = "expectedResult";
+    public static final String
 
     @JsonProperty("packageId")
     int packageId;
