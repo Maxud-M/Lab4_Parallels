@@ -10,6 +10,7 @@ import akka.pattern.PatternsCS;
 import akka.routing.*;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import akka.util.Timeout;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -19,15 +20,16 @@ import java.util.concurrent.CompletionStage;
 import static akka.http.javadsl.server.Directives.*;
 
 public class Main {
+    static final Duration TIMEOUT = Duration.ofSeconds(5);
 
     public class MainHttp {
         public Route createRoute(ActorSystem system) {
             return route(
                     get(
                             () -> parameter("packageId", (parameter) -> {
-                                int packageId = Integer.valueOf(parameter);
+                                int packageId = Integer.parseInt(parameter);
                                 ActorSelection storeActor = system.actorSelection("/user/storeActor");
-                                CompletionStage<Object> result = PatternsCS.ask(storeActor, new StoreActor.GetMessage(packageId));
+                                CompletionStage<Object> result = PatternsCS.ask(storeActor, new StoreActor.GetMessage(packageId), TIMEOUT);
                             })
                     )
             )
