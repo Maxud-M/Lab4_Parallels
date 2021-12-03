@@ -21,7 +21,10 @@ public class PackageTests {
         @JsonProperty("testName")
         String testName;
 
-        @JsonProperty("")
+        @JsonProperty("expectedResult")
         String expectedResult;
+
+        @JsonProperty("params")
+        
     }
 }
