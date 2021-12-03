@@ -30,6 +30,7 @@ public class Main {
                                 int packageId = Integer.parseInt(parameter);
                                 ActorSelection storeActor = system.actorSelection("/user/storeActor");
                                 CompletionStage<Object> result = PatternsCS.ask(storeActor, new StoreActor.GetMessage(packageId), TIMEOUT);
+                                return CompleteOkWithFuture
                             })
                     )
             )
