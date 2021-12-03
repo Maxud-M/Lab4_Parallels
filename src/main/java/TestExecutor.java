@@ -2,6 +2,8 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSelection;
 import akka.japi.pf.ReceiveBuilder;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -22,7 +24,9 @@ public class TestExecutor extends AbstractActor {
     }
 
     public class Message{
+        @JsonProperty(packageId)
         private int packageId;
+
         private String functionName;
         private String jsScript;
         private ArrayList<Object> params;
