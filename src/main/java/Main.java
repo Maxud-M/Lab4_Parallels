@@ -38,7 +38,7 @@ public class Main {
                                 );
                             })
                     ),
-                    post(() -> entity(Jackson.unmarshaller(TestExecutor)))
+                    post(() -> entity(Jackson.unmarshaller(TestExecutor.Message.class)), (message) -> )
 
             );
         }
