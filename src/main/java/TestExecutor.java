@@ -1,4 +1,5 @@
 import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
 import akka.actor.ActorSelection;
 import akka.japi.pf.ReceiveBuilder;
 import javax.script.Invocable;
@@ -13,8 +14,10 @@ public class TestExecutor extends AbstractActor {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
             engine.eval(m.getJsScript());
             Invocable invocable = (Invocable) engine;
+
             String result = invocable.invokeFunction(m.getFunctionName(), m.getParams()).toString();
-            sender().tell(new StoreActor.StoreMessage(m.getPackageId(), result), self());
+            ActorSelection storeActor = getContext().actorSelection("/user/storeActor");
+            storeActor.tell(new StoreActor.StoreMessage(m.getPackageId(), result), ActorRef.noSender());
         }).build();
     }
 
@@ -22,8 +25,16 @@ public class TestExecutor extends AbstractActor {
         private int packageId;
         private String functionName;
         private String jsScript;
-        private ArrayList<String> params;
+        private ArrayList<Object> params;
         private String expectedResult;
+
+        Message(int packageId, String functionName, String jsScript, ArrayList<Object> params, String expectedResult) {
+            this.packageId = packageId;
+                this.functionName = functionName;
+            this.jsScript = jsScript;
+            this.params = params;
+            this.expectedResult = expectedResult;
+        }
 
         public int getPackageId() {
             return packageId;
@@ -40,7 +51,7 @@ public class TestExecutor extends AbstractActor {
             return expectedResult;
         }
 
-        public ArrayList<String> getParams() {
+        public ArrayList<Object> getParams() {
             return params;
         }
     }
