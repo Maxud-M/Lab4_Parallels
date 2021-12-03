@@ -24,7 +24,13 @@ import static akka.http.javadsl.server.Directives.*;
 public class Main {
     static final Duration TIMEOUT = Duration.ofSeconds(5);
 
-    public class MainHttp {
+    public static class MainHttp {
+
+        ActorSystem system;
+        MainHttp(ActorSystem system){
+            this.system = system;
+        }
+
         public Route createRoute(ActorSystem system) {
             return route(
                     get(
@@ -38,18 +44,19 @@ public class Main {
                                 );
                             })
                     ),
-                    post(() -> entity(Jackson.unmarshaller(PackageTests.class), (message) -> {
-                        ActorSelection router = system.actorSelection("/user/router");
-                        for(int i = 0; i < message.getTests().size(); ++i) {
-                            PackageTests.Test test = message.getTests().get(i);
-                            router.tell(
-                                    new TestExecutor.Message(message.getPackageId(), message.getFunctionName(),
-                                            message.getJsScript(), test.getParams(), test.getExpectedResult()), ActorRef.noSender());
-                        }
-                        return complete("tests execution started");
-                    })
-
-            ));
+                    post(
+                            () -> entity(Jackson.unmarshaller(PackageTests.class), (message) -> {
+                            ActorSelection router = system.actorSelection("/user/router");
+                            for(int i = 0; i < message.getTests().size(); ++i) {
+                                PackageTests.Test test = message.getTests().get(i);
+                                router.tell(
+                                        new TestExecutor.Message(message.getPackageId(), message.getFunctionName(),
+                                                message.getJsScript(), test.getParams(), test.getExpectedResult()), ActorRef.noSender());
+                            }
+                            return complete("test execution started");
+                        })
+                    )
+            );
         }
     }
 
