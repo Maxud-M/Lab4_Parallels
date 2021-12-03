@@ -38,7 +38,16 @@ public class Main {
                                 );
                             })
                     ),
-                    post(() -> entity(Jackson.unmarshaller(PackageTests.class)), (message) -> )
+                    post(() -> entity(Jackson.unmarshaller(PackageTests.class), (message) -> {
+                        ActorSelection router = system.actorSelection("/user/router");
+                        for(int i = 0; i < message.getTests().size(); ++i) {
+                            PackageTests.Test test = message.getTests().get(i);
+                            router.tell(
+                                    new TestExecutor.Message(message.getPackageId(), message.getFunctionName(),
+                                            message.getJsScript(), test.getParams(), test.getExpectedResult()), ActorRef.noSender());
+                        }
+                        return 
+                    })
 
             );
         }

@@ -23,7 +23,7 @@ public class TestExecutor extends AbstractActor {
         }).build();
     }
 
-    public class Message{
+    public static class Message{
         private int packageId;
 
         private String functionName;
