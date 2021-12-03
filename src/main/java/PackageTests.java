@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 
 public class PackageTests {
+
+    const static final Srting
+
     @JsonProperty("packageId")
     int packageId;
 
