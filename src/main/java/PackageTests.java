@@ -59,11 +59,11 @@ public class PackageTests {
         private String expectedResult;
 
         @JsonProperty(PARAMS)
-        private ArrayList<Object> params;
+        private ArrayList<Integer> params;
 
         @JsonCreator
         Test(@JsonProperty(TEST_NAME) String testName, @JsonProperty(EXPECTED_RESULT) String expectedResult,
-             @JsonProperty(PARAMS) ArrayList<Object> params) {
+             @JsonProperty(PARAMS) ArrayList<Integer> params) {
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;
@@ -77,7 +77,7 @@ public class PackageTests {
             return testName;
         }
 
-        public ArrayList<Object> getParams() {
+        public ArrayList<Integer> getParams() {
             return params;
         }
     }

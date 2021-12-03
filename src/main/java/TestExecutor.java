@@ -29,10 +29,10 @@ public class TestExecutor extends AbstractActor {
         private String functionName;
 
         private String jsScript;
-        private ArrayList<Object> params;
+        private ArrayList<Integer> params;
         private String expectedResult;
 
-        Message(int packageId, String functionName, String jsScript, ArrayList<Object> params, String expectedResult) {
+        Message(int packageId, String functionName, String jsScript, ArrayList<Integer> params, String expectedResult) {
             this.packageId = packageId;
                 this.functionName = functionName;
             this.jsScript = jsScript;
@@ -55,7 +55,7 @@ public class TestExecutor extends AbstractActor {
             return expectedResult;
         }
 
-        public ArrayList<Object> getParams() {
+        public ArrayList<Integer> getParams() {
             return params;
         }
     }
