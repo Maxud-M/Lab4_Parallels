@@ -1,5 +1,7 @@
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+
 public class PackageTests {
     @JsonProperty("packageId")
     int packageId;
@@ -12,4 +14,10 @@ public class PackageTests {
 
     @JsonProperty("tests")
     ArrayList<Test> tests;
+
+
+
+    public class Test{
+        
+    }
 }
