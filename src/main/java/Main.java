@@ -46,7 +46,7 @@ public class Main {
                                     new TestExecutor.Message(message.getPackageId(), message.getFunctionName(),
                                             message.getJsScript(), test.getParams(), test.getExpectedResult()), ActorRef.noSender());
                         }
-                        return 
+                        return complete("")
                     })
 
             );
