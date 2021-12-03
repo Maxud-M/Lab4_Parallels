@@ -7,5 +7,8 @@ public class PackageTests {
     @JsonProperty("jsScript")
     String jsScript;
 
-    @JsonProperty
+    @JsonProperty("functionName")
+    String functionName;
+
+    @JsonProperty()
 }
