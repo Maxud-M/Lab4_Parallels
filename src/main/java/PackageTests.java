@@ -38,7 +38,7 @@ public class PackageTests {
 
         @JsonCreator
         Test(@JsonProperty(Constants.PACKAGE_ID) int packageId, @JsonProperty(JS_SCRIPT) String jsScript,
-             @JsonProperty()) {
+             @JsonProperty(FUNCTION_NAME) String functionName, @JsonProperty()) {
 
         }
     }
