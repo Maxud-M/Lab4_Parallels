@@ -4,5 +4,8 @@ public class PackageTests {
     @JsonProperty("packageId")
     int packageId;
 
-    @JsonProperty("")
+    @JsonProperty("jsScript")
+    String jsScript;
+
+    @JsonProperty
 }
