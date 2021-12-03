@@ -19,7 +19,7 @@ public class Main {
 
     public class MainHttp {
         public Route createRoute(ActorSystem system) {
-            return new route()
+            return new route
         }
     }
 
