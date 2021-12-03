@@ -13,16 +13,16 @@ public class PackageTests {
     public static final String TEST_NAME = "testName"
 
     @JsonProperty(Constants.PACKAGE_ID)
-    int packageId;
+    private int packageId;
 
     @JsonProperty(JS_SCRIPT)
-    String jsScript;
+    private String jsScript;
 
     @JsonProperty(FUNCTION_NAME)
-    String functionName;
+    private String functionName;
 
     @JsonProperty(TESTS)
-    ArrayList<Test> tests;
+    private ArrayList<Test> tests;
 
     @JsonCreator
     PackageTests(@JsonProperty(Constants.PACKAGE_ID) int packageId, @JsonProperty(JS_SCRIPT) String jsScript,
@@ -33,17 +33,33 @@ public class PackageTests {
         this.jsScript = jsScript;
     }
 
+    public String getFunctionName() {
+        return functionName;
+    }
+
+    public String getJsScript() {
+        return jsScript;
+    }
+
+    public int getPackageId() {
+        return packageId;
+    }
+
+    public ArrayList<Test> getTests() {
+        return tests;
+    }
+
 
 
     public class Test{
         @JsonProperty(TEST_NAME)
-        String testName;
+        private String testName;
 
         @JsonProperty(EXPECTED_RESULT)
-        String expectedResult;
+        private String expectedResult;
 
         @JsonProperty(PARAMS)
-        ArrayList<Object> params;
+        private ArrayList<Object> params;
 
         @JsonCreator
         Test(@JsonProperty(TEST_NAME) String testName, @JsonProperty(EXPECTED_RESULT) String expectedResult,
@@ -51,6 +67,18 @@ public class PackageTests {
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;
+        }
+
+        public String getExpectedResult() {
+            return expectedResult;
+        }
+
+        public String getTestName() {
+            return testName;
+        }
+
+        public ArrayList<Object> getParams() {
+            return params;
         }
     }
 }
