@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class PackageTests {
         String expectedResult;
 
         @JsonProperty("params")
-        
+        ArrayList<Object> params;
+
+        @JsonCreator
+        Test(@JsonProperty)
     }
 }
