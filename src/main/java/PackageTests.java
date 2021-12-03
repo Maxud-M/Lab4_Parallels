@@ -10,5 +10,6 @@ public class PackageTests {
     @JsonProperty("functionName")
     String functionName;
 
-    @JsonProperty()
+    @JsonProperty("tests")
+    ArrayList<Test> tests;
 }
