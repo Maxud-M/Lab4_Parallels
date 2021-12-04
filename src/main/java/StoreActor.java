@@ -48,6 +48,7 @@ public class StoreActor extends AbstractActor {
                         results = new ArrayList<>(0);
                     }
                     results.add(m.getResult());
+                    System.out.println(m.getResult());
                     store.put(m.getPackageId(), results);
                     System.out.println("recieve test");
         })
