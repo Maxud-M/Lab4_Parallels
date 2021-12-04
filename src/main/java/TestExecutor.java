@@ -1,21 +1,31 @@
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
-import akka.actor.ActorSelection;
 import akka.japi.pf.ReceiveBuilder;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class TestExecutor extends AbstractActor {
+    ActorRef storeActor;
+
+    TestExecutor(ActorRef storeActor) {
+        this.storeActor = storeActor;
+    }
+
+    String execute(Message m) throws ScriptException, NoSuchMethodException {
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+        engine.eval(m.getJsScript());
+        Invocable invocable = (Invocable) engine;
+        String result = invocable.invokeFunction(m.getFunctionName(), m.getParams()).toString();
+
+        return result;
+    }
+
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create().match(Message.class, m -> {
-            ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-            engine.eval(m.getJsScript());
-            Invocable invocable = (Invocable) engine;
-
-            String result = invocable.invokeFunction(m.getFunctionName(), m.getParams()).toString();
-            ActorSelection storeActor = getContext().actorSelection("/user/storeActor");
+            String result = execute(m);
             storeActor.tell(new StoreActor.StoreMessage(m.getPackageId(), result), ActorRef.noSender());
         }).build();
     }

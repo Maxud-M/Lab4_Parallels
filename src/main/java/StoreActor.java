@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StoreActor extends AbstractActor {
+    public static final String RECIEVE_TEST_MESSAGE = "recieve test";
+
     private Map<Integer, ArrayList<String>> store = new HashMap<>();
 
     public static class StoreMessage{
@@ -49,7 +51,7 @@ public class StoreActor extends AbstractActor {
                     results.add(m.getResult());
                     System.out.println(m.getResult());
                     store.put(m.getPackageId(), results);
-                    System.out.println("recieve test");
+                    System.out.println(RECIEVE_TEST_MESSAGE);
         })
                 .match(GetMessage.class, req -> sender().tell(store.get(req.getPackageId()), self())).build();
     }
