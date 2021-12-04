@@ -46,9 +46,9 @@ public class PackageTests {
 
 
     public static class Test{
+        private Object[] params;
         private String testName;
         private String expectedResult;
-        private Object[] params;
 
         @JsonCreator
         Test(@JsonProperty(TEST_NAME) String testName, @JsonProperty(EXPECTED_RESULT) String expectedResult,
