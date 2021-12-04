@@ -16,7 +16,6 @@ public class StoreActor extends AbstractActor {
         StoreMessage(int packageId, String result) {
             this.packageId = packageId;
             this.result = result;
-
         }
 
         public String getResult() {
