@@ -1,5 +1,4 @@
 import akka.actor.AbstractActor;
-import akka.actor.dsl.Inbox;
 import akka.japi.pf.ReceiveBuilder;
 
 import java.util.ArrayList;

@@ -2,12 +2,9 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSelection;
 import akka.japi.pf.ReceiveBuilder;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import java.util.ArrayList;
 
 public class TestExecutor extends AbstractActor {
     @Override
