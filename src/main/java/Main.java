@@ -23,46 +23,8 @@ import java.util.concurrent.CompletionStage;
 import static akka.http.javadsl.server.Directives.*;
 
 public class Main {
-    static final Duration TIMEOUT = Duration.ofSeconds(5);
-    public static final String STORE_ACTOR_PATH = "/user/storeActor";
-    public static final String ROUTER_ACTOR_PATH = "/user/router";
-    public static final String TEST_EXECUTION_STARTED_MESSAGE = "test execution started";
 
-    public static class MainHttp {
 
-        ActorSystem system;
-        MainHttp(ActorSystem system){
-            this.system = system;
-        }
-
-        public Route createRoute(ActorSystem system) {
-            return route(
-                    get(
-                            () -> parameter(Constants.PACKAGE_ID, (parameter) -> {
-                                int packageId = Integer.parseInt(parameter);
-                                ActorSelection storeActor = system.actorSelection(STORE_ACTOR_PATH);
-                                CompletionStage<Object> result = PatternsCS.ask(storeActor, new StoreActor.GetMessage(packageId), TIMEOUT);
-                                return completeOKWithFuture(
-                                        result,
-                                        Jackson.marshaller()
-                                );
-                            })
-                    ),
-                    post(
-                            () -> entity(Jackson.unmarshaller(PackageTests.class), (message) -> {
-                            ActorSelection router = system.actorSelection(ROUTER_ACTOR_PATH);
-                            for(int i = 0; i < message.getTests().size(); ++i) {
-                                PackageTests.Test test = message.getTests().get(i);
-                                router.tell(
-                                        new TestExecutor.Message(message.getPackageId(), message.getFunctionName(),
-                                                message.getJsScript(), test.getParams(), test.getExpectedResult()), ActorRef.noSender());
-                            }
-                            return complete(TEST_EXECUTION_STARTED_MESSAGE);
-                        })
-                    )
-            );
-        }
-    }
 
     public static void main(String[] args) throws IOException {
         ActorSystem system = ActorSystem.create("routes");
@@ -84,7 +46,7 @@ public class Main {
                 ConnectHttp.toHost("localhost", 8080),
                 materializer
         );
-            System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
+        System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
         System.in.read();
         binding
                 .thenCompose(ServerBinding::unbind)
