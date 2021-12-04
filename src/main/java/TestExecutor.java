@@ -32,9 +32,7 @@ public class TestExecutor extends AbstractActor {
 
     public static class Message{
         private int packageId;
-
         private String functionName;
-
         private String jsScript;
         private Object[] params;
         private String expectedResult;
@@ -53,15 +51,12 @@ public class TestExecutor extends AbstractActor {
         public String getFunctionName() {
             return functionName;
         }
-
         public String getJsScript() {
             return jsScript;
         }
-
         public String getExpectedResult() {
             return expectedResult;
         }
-
         public Object[] getParams() {
             return params;
         }

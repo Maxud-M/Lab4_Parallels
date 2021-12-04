@@ -1,5 +1,4 @@
 import akka.actor.ActorRef;
-import akka.actor.ActorSelection;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.server.Route;
@@ -43,7 +42,8 @@ public class MainHttp {
                                 PackageTests.Test test = message.getTests().get(i);
                                 routerActor.tell(
                                         new TestExecutor.Message(message.getPackageId(), message.getFunctionName(),
-                                                message.getJsScript(), test.getParams(), test.getExpectedResult()), ActorRef.noSender());
+                                                message.getJsScript(), test.getParams(), test.getExpectedResult()), ActorRef.noSender()
+                                );
                             }
                             return complete(TEST_EXECUTION_STARTED_MESSAGE);
                         })
